@@ -43,7 +43,6 @@ public class MainActivity extends Activity implements OnItemClickListener {
     Handler mHandler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
-            // TODO Auto-generated method stub
             Log.i(tag, "in handler");
             super.handleMessage(msg);
             switch(msg.what){
@@ -74,6 +73,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
         }
         else{
             if(!btAdapter.isEnabled()){
+                Toast.makeText(getApplicationContext(), "Einschalten" , Toast.LENGTH_LONG).show();
                 turnOnBT();
             }
 
@@ -84,18 +84,16 @@ public class MainActivity extends Activity implements OnItemClickListener {
 
     }
     private void startDiscovery() {
-        // TODO Auto-generated method stub
         btAdapter.cancelDiscovery();
         btAdapter.startDiscovery();
+        Toast.makeText(getApplicationContext(), "Starte Erkennung!", Toast.LENGTH_LONG).show();
 
     }
     private void turnOnBT() {
-        // TODO Auto-generated method stub
         Intent intent =new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
         startActivityForResult(intent, 1);
     }
     private void getPairedDevices() {
-        // TODO Auto-generated method stub
         devicesArray = btAdapter.getBondedDevices();
         if(devicesArray.size()>0){
             for(BluetoothDevice device:devicesArray){
@@ -105,7 +103,6 @@ public class MainActivity extends Activity implements OnItemClickListener {
         }
     }
     private void init() {
-        // TODO Auto-generated method stub
         listView=(ListView)findViewById(R.id.listView);
         listView.setOnItemClickListener(this);
         listAdapter= new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,0);
@@ -117,7 +114,6 @@ public class MainActivity extends Activity implements OnItemClickListener {
         receiver = new BroadcastReceiver(){
             @Override
             public void onReceive(Context context, Intent intent) {
-                // TODO Auto-generated method stub
                 String action = intent.getAction();
 
                 if(BluetoothDevice.ACTION_FOUND.equals(action)){
@@ -165,14 +161,12 @@ public class MainActivity extends Activity implements OnItemClickListener {
 
     @Override
     protected void onPause() {
-        // TODO Auto-generated method stub
         super.onPause();
         unregisterReceiver(receiver);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // TODO Auto-generated method stub
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_CANCELED){
             Toast.makeText(getApplicationContext(), "Bluetooth must be enabled to continue", Toast.LENGTH_SHORT).show();
@@ -181,7 +175,6 @@ public class MainActivity extends Activity implements OnItemClickListener {
     }
     public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                             long arg3) {
-        // TODO Auto-generated method stub
 
         if(btAdapter.isDiscovering()){
             btAdapter.cancelDiscovery();
@@ -312,3 +305,6 @@ public class MainActivity extends Activity implements OnItemClickListener {
 //https://www.dropbox.com/sh/uo4ivlkdxo27hv6/Cigw4Ewyvx
 
 //https://www.youtube.com/watch?v=CduipeJM3UQ#t=44.930226
+
+
+//https://www.youtube.com/watch?v=-OICAj3VHPY
