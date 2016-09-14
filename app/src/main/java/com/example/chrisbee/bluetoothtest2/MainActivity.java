@@ -50,7 +50,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
                 case SUCCESS_CONNECT:
                     // DO something
                     ConnectedThread connectedThread = new ConnectedThread((BluetoothSocket)msg.obj);
-                    Toast.makeText(getApplicationContext(), "CONNECT", 0).show();
+                    Toast.makeText(getApplicationContext(), "CONNECT", Toast.LENGTH_LONG).show();
                     String s = "successfully connected";
                     connectedThread.write(s.getBytes());
                     Log.i(tag, "connected");
@@ -58,7 +58,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
                 case MESSAGE_READ:
                     byte[] readBuf = (byte[])msg.obj;
                     String string = new String(readBuf);
-                    Toast.makeText(getApplicationContext(), string, 0).show();
+                    Toast.makeText(getApplicationContext(), string, Toast.LENGTH_LONG).show();
                     break;
             }
         }
@@ -69,7 +69,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
         setContentView(R.layout.activity_main);
         init();
         if(btAdapter==null){
-            Toast.makeText(getApplicationContext(), "No bluetooth detected", 0).show();
+            Toast.makeText(getApplicationContext(), "No bluetooth detected", Toast.LENGTH_LONG).show();
             finish();
         }
         else{
@@ -194,7 +194,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
             Log.i(tag, "in click listener");
         }
         else{
-            Toast.makeText(getApplicationContext(), "device is not paired", 0).show();
+            Toast.makeText(getApplicationContext(), "device is not paired", Toast.LENGTH_LONG).show();
         }
     }
 
